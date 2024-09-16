@@ -1,9 +1,9 @@
-require('dotenv').config(); // Load environment variables from .env file
-const express = require('express');
-const mongoose = require('mongoose');
-const cors = require('cors');
-const axios = require('axios');
-const Crypto = require('./models/crypto'); // Your schema file
+require("dotenv").config(); // Load environment variables from .env file
+const express = require("express");
+const mongoose = require("mongoose");
+const cors = require("cors");
+const axios = require("axios");
+const Crypto = require("./models/crypto"); // Your schema file
 
 const app = express();
 
@@ -14,50 +14,58 @@ app.use(cors());
 app.use(express.json());
 
 // Connect to MongoDB
-mongoose.connect(process.env.MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-})
-.then(() => console.log('Connected to MongoDB'))
-.catch(err => console.error('Failed to connect to MongoDB', err));
+mongoose
+	.connect(process.env.MONGO_URI, {
+		useNewUrlParser: true,
+		useUnifiedTopology: true,
+	})
+	.then(() => console.log("Connected to MongoDB"))
+	.catch((err) => console.error("Failed to connect to MongoDB", err));
 
 // Fetch and store crypto data
-app.get('/fetch-crypto', async (req, res) => {
-    try {
-        const response = await axios.get('https://api.wazirx.com/api/v2/tickers');
-        const data = Object.values(response.data).slice(0, 10); // Top 10 results
+app.get("/fetch-crypto", async (req, res) => {
+	try {
+		const response = await axios.get(
+			"https://api.wazirx.com/api/v2/tickers"
+		);
+		const data = Object.values(response.data).slice(0, 10); // Top 10 results
 
-        await Crypto.deleteMany(); // Clear existing data
+		await Crypto.deleteMany(); // Clear existing data
 
-        const cryptoData = data.map((item) => ({
-            name: item.name,
-            last: item.last,
-            buy: item.buy,
-            sell: item.sell,
-            volume: item.volume,
-            base_unit: item.base_unit,
-        }));
+		const cryptoData = data.map((item) => ({
+			name: item.name,
+			last: item.last,
+			buy: item.buy,
+			sell: item.sell,
+			volume: item.volume,
+			base_unit: item.base_unit,
+		}));
 
-        await Crypto.insertMany(cryptoData); // Insert new data
-        res.send('Data fetched and stored in MongoDB');
-    } catch (error) {
-        console.error('Error fetching data:', error);
-        res.status(500).send('Error fetching data');
-    }
+		await Crypto.insertMany(cryptoData); // Insert new data
+		res.send("Data fetched and stored in MongoDB");
+	} catch (error) {
+		console.error("Error fetching data:", error);
+		res.status(500).send("Error fetching data");
+	}
+});
+
+//hello world
+app.get("/", (req, res) => {
+	res.send("Hello World");
 });
 
 // Retrieve stored crypto data
-app.get('/cryptos', async (req, res) => {
-    try {
-        const cryptos = await Crypto.find();
-        res.json(cryptos);
-    } catch (error) {
-        console.error('Error fetching data:', error);
-        res.status(500).send('Error fetching data');
-    }
+app.get("/cryptos", async (req, res) => {
+	try {
+		const cryptos = await Crypto.find();
+		res.json(cryptos);
+	} catch (error) {
+		console.error("Error fetching data:", error);
+		res.status(500).send("Error fetching data");
+	}
 });
 
 // Start the server
 app.listen(3000, () => {
-    console.log('Server is running on port 3000');
+	console.log("Server is running on port 3000");
 });
