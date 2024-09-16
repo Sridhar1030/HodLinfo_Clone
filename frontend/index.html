@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Hodlinfo</title>
+		<link rel="stylesheet" href="styles.css" />
+	</head>
+	<body>
+		<div class="container">
+			<!-- Header -->
+			<header>
+				<div class="logo">HODLINFO</div>
+				<div class="currency-buttons">
+					<button>INR</button>
+					<button>BTC</button>
+					<button class="buy-btc">BUY BTC</button>
+				</div>
+			</header>
+
+			<!-- Price Information Section -->
+			<div class="price-info">
+				<div class="percentage-info">
+					<span>0.1%<br />5 Mins</span>
+					<span>0.96%<br />1 Hour</span>
+				</div>
+				<div class="best-price">
+					<p>Best Price to Trade</p>
+					<h1>₹ 5656600</h1>
+					<p>Average BTC/INR net price including commission</p>
+				</div>
+				<div class="percentage-info">
+					<span>2.73%<br />1 Day</span>
+					<span>7.51%<br />7 Days</span>
+				</div>
+			</div>
+
+			<!-- Table Section -->
+			<table>
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>Platform</th>
+						<th>Last Traded Price</th>
+						<th>Buy / Sell Price</th>
+						<th>Difference</th>
+						<th>Savings</th>
+					</tr>
+				</thead>
+				<tbody id="crypto-data">
+					<!-- Dynamic content will be populated here -->
+				</tbody>
+			</table>
+
+			<!-- Add to Home screen button -->
+			<button class="add-to-home">Add hodlinfo to home screen</button>
+		</div>
+
+		<script src="script.js"></script>
+	</body>
+</html>

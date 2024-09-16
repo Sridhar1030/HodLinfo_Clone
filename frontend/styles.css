@@ -1,0 +1,173 @@
+/* Base styles */
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	font-family: "Arial", sans-serif;
+	background-color: #1f2235;
+	color: white;
+}
+
+.container {
+	width: 90%;
+	max-width: 1200px;
+	margin: auto;
+	padding-top: 20px;
+}
+
+/* Header styles */
+header {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.logo {
+	font-size: 1.8rem;
+	font-weight: bold;
+	color: #00ffcc;
+}
+
+.currency-buttons {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.currency-buttons button {
+	margin: 5px;
+	padding: 10px 15px;
+	background-color: #2d3250;
+	color: white;
+	border: none;
+	cursor: pointer;
+}
+
+.buy-btc {
+	background-color: #00ffcc;
+}
+
+/* Price Information Section */
+.price-info {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: center;
+	margin: 20px 0;
+}
+
+.percentage-info {
+	flex: 1;
+	text-align: center;
+}
+
+.percentage-info span {
+	display: block;
+	font-size: 1rem;
+	margin: 5px 0;
+}
+
+.best-price {
+	flex: 2;
+	text-align: center;
+}
+
+.best-price h1 {
+	font-size: 2rem;
+	margin: 10px 0;
+}
+
+@media (min-width: 768px) {
+	.best-price h1 {
+		font-size: 3rem;
+	}
+}
+
+/* Table Section */
+table {
+	width: 100%;
+	border-collapse: collapse;
+	margin-top: 20px;
+}
+
+th,
+td {
+	text-align: center;
+	padding: 10px;
+}
+
+th {
+	background-color: #2d3250;
+}
+
+tr:nth-child(even) {
+	background-color: #2d3250;
+}
+
+/* Add to Home screen button */
+.add-to-home {
+	margin: 20px 0;
+	padding: 10px 20px;
+	background-color: #00ffcc;
+	color: black;
+    font: bold;
+	border: none;
+	cursor: pointer;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+/* Media Queries for responsiveness */
+@media (max-width: 768px) {
+	.container {
+		width: 95%;
+	}
+
+	.header,
+	.currency-buttons {
+		flex-direction: column;
+	}
+
+	.currency-buttons button {
+		margin: 5px 0;
+		width: 100%;
+	}
+
+	.price-info {
+		flex-direction: column;
+	}
+
+	.percentage-info {
+		flex: none;
+		margin: 10px 0;
+	}
+
+	.best-price {
+		margin: 10px 0;
+	}
+}
+
+@media (max-width: 480px) {
+	.logo {
+		font-size: 1.5rem;
+	}
+
+	.currency-buttons button {
+		padding: 8px 12px;
+		font-size: 0.9rem;
+	}
+
+	.best-price h1 {
+		font-size: 1.5rem;
+	}
+
+	.add-to-home {
+		padding: 8px 16px;
+		font-size: 0.9rem;
+        
+	}
+}
