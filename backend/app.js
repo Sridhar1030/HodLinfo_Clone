@@ -1,9 +1,9 @@
 require("dotenv").config(); // Load environment variables from .env file
-const express = require("express");
-const mongoose = require("mongoose");
-const cors = require("cors");
-const axios = require("axios");
-const Crypto = require("./models/crypto"); // Your schema file
+import express, { json } from "express";
+import { connect } from "mongoose";
+import cors from "cors";
+import { get } from "axios";
+import { deleteMany, insertMany, find } from "./models/crypto"; // Your schema file
 
 const app = express();
 
@@ -11,11 +11,10 @@ const app = express();
 app.use(cors());
 
 // Parse JSON request bodies
-app.use(express.json());
+app.use(json());
 
 // Connect to MongoDB
-mongoose
-	.connect(process.env.MONGO_URI, {
+connect(process.env.MONGO_URI, {
 		useNewUrlParser: true,
 		useUnifiedTopology: true,
 	})
@@ -25,12 +24,12 @@ mongoose
 // Fetch and store crypto data
 app.get("/fetch-crypto", async (req, res) => {
 	try {
-		const response = await axios.get(
+		const response = await get(
 			"https://api.wazirx.com/api/v2/tickers"
 		);
 		const data = Object.values(response.data).slice(0, 10); // Top 10 results
 
-		await Crypto.deleteMany(); // Clear existing data
+		await deleteMany(); // Clear existing data
 
 		const cryptoData = data.map((item) => ({
 			name: item.name,
@@ -41,7 +40,7 @@ app.get("/fetch-crypto", async (req, res) => {
 			base_unit: item.base_unit,
 		}));
 
-		await Crypto.insertMany(cryptoData); // Insert new data
+		await insertMany(cryptoData); // Insert new data
 		res.send("Data fetched and stored in MongoDB");
 	} catch (error) {
 		console.error("Error fetching data:", error);
@@ -57,7 +56,7 @@ app.get("/", (req, res) => {
 // Retrieve stored crypto data
 app.get("/cryptos", async (req, res) => {
 	try {
-		const cryptos = await Crypto.find();
+		const cryptos = await find();
 		res.json(cryptos);
 	} catch (error) {
 		console.error("Error fetching data:", error);

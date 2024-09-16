@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
+import { Schema, model } from 'mongoose';
 
-const cryptoSchema = new mongoose.Schema({
+const cryptoSchema = new Schema({
     name: String,
     last: String,
     buy: String,
@@ -9,6 +9,6 @@ const cryptoSchema = new mongoose.Schema({
     base_unit: String,
 }, { timestamps: true }); // Add timestamps for createdAt and updatedAt
 
-const Crypto = mongoose.model('Crypto', cryptoSchema);
+const Crypto = model('Crypto', cryptoSchema);
 
-module.exports = Crypto;
+export default Crypto;
