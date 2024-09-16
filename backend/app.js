@@ -29,7 +29,7 @@ app.get("/fetch-crypto", async (req, res) => {
         const response = await axios.get("https://api.wazirx.com/api/v2/tickers");
         const data = Object.values(response.data).slice(0, 10); // Top 10 results
 
-        await Crypto.deleteMany(); // Clear existing data
+        // await Crypto.deleteMany(); // Clear existing data
 
         const cryptoData = data.map((item) => ({
             name: item.name,

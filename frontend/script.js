@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	// Fetch cryptocurrency data
 	async function loadCryptoData() {
 		try {
-			const response = await fetch("http://localhost:3000/cryptos"); // Update this URL as per your backend
+			const response = await fetch("https://hodlinfo-clone-0twh.onrender.com/cryptos"); // Update this URL as per your backend
 			const cryptos = await response.json();
 
 			const tableBody = document.getElementById("crypto-data");
