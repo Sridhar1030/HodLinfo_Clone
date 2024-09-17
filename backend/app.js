@@ -46,7 +46,8 @@ app.get("/fetch-crypto", async (req, res) => {
 		}));
 
 		await Crypto.insertMany(cryptoData); // Insert new data
-		res.send("Data fetched and stored in MongoDB");
+
+		return res.send("Data fetched and stored in MongoDB");
 	} catch (error) {
 		console.error("Error fetching data:", error);
 		res.status(500).send("Error fetching data");
