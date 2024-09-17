@@ -19,8 +19,8 @@ app.use(express.json());
 connect(process.env.MONGO_URI, {
 	useNewUrlParser: true,
 	useUnifiedTopology: true,
-	serverSelectionTimeoutMS: 30000, // Increase timeout to 30 seconds
-	socketTimeoutMS: 45000, // Increase socket timeout to 45 seconds
+	serverSelectionTimeoutMS: 60000, // Increase timeout to 30 seconds
+	socketTimeoutMS: 60000, // Increase socket timeout to 45 seconds
 })
 	.then(() => console.log("Connected to MongoDB"))
 	.catch((err) => console.error("Failed to connect to MongoDB", err));
