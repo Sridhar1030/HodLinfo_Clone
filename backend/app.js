@@ -34,7 +34,7 @@ app.get("/fetch-crypto", async (req, res) => {
 		const data = Object.values(response.data).slice(0, 10); // Top 10 results
 		console.log("data", data);
 
-		// await Crypto.deleteMany(); 
+		// await Crypto.deleteMany()
 
 		const cryptoData = data.map((item) => ({
 			name: item.name,
