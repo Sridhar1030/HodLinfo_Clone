@@ -19,8 +19,8 @@ app.use(express.json());
 connect(process.env.MONGO_URI, {
 	useNewUrlParser: true,
 	useUnifiedTopology: true,
-	serverSelectionTimeoutMS: 60000, // Increase timeout to 30 seconds
-	socketTimeoutMS: 60000, // Increase socket timeout to 45 seconds
+	serverSelectionTimeoutMS: 30000,  // Timeout after 30 seconds instead of 10
+    socketTimeoutMS: 45000,  // Increase socket timeout to 45 seconds
 })
 	.then(() => console.log("Connected to MongoDB"))
 	.catch((err) => console.error("Failed to connect to MongoDB", err));
@@ -34,7 +34,7 @@ app.get("/fetch-crypto", async (req, res) => {
 		const data = Object.values(response.data).slice(0, 10); // Top 10 results
 		console.log("data", data);
 
-		// await Crypto.deleteMany(); // Clear existing data
+		// await Crypto.deleteMany(); 
 
 		const cryptoData = data.map((item) => ({
 			name: item.name,
